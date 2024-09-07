@@ -1,0 +1,206 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+:root {
+  --primary-black: #000000;
+  --primary-white: #ffffff;
+  --primary-gray: #f5f5f5;
+  --primary-blue: #c2e5fd;
+  --header-size: 12vh;
+  --hero-section: 60vh;
+  --project-scroller: 28vh;
+}
+.main-container {
+  background: var(--primary-gray);
+  min-height: 100vh;
+}
+.container {
+  width: 100%;
+  height: 100vh;
+  width: 1450px;
+  margin: auto;
+  padding: 0 2rem;
+}
+header {
+  height: var(--header-size);
+}
+.navbar {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+.navlist,
+.list {
+  display: flex;
+  gap: 2rem;
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+.navlinks {
+  font-size: 1rem;
+  color: var(--primary-black);
+}
+.nav-btn {
+  background: var(--primary-black);
+  color: var(--primary-white);
+  padding: 0.7rem 1.1rem;
+  border-radius: 0.5rem;
+}
+.nav-btn:hover {
+  background: var(--primary-blue);
+  color: var(--primary-black);
+}
+.hero-section {
+  height: var(--hero-section);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+h1 {
+  font-family: "ADLaM Display", system-ui;
+  font-size: 2.8rem;
+  margin: 0.4rem 0;
+}
+.profile-container {
+  background-image: url(./anupam_invent.jpg);
+  background-position: center;
+  background-size: cover;
+  width: 19rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 0.2rem solid var(--primary-black);
+  box-shadow: 0 5px 5px var(--primary-blue);
+  animation: 6s blob infinite ease-in-out;
+  transition: all 1s ease-in-out;
+}
+.fa-brands {
+  color: var(--primary-black);
+  font-size: 1.5rem;
+}
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.8rem 0 2.5rem 0;
+}
+p {
+  font-size: 1.1rem;
+}
+.content {
+  width: 100%;
+  max-width: 500px;
+}
+.skill {
+  background: var(--primary-white);
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.5rem;
+}
+.project-scroller {
+  height: var(--project-scroller);
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+.project {
+  width: 20rem;
+  height: 11rem;
+  position: relative;
+  display: inline-block;
+  margin-right: 1rem;
+}
+.proj-btn {
+  background: var(--primary-blue);
+  color: var(--primary-black);
+  padding: 0.7rem 1.1rem;
+  border-radius: 0.5rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -300%);
+  transition: transform 0.3s ease-in-out;
+}
+.project:hover .proj-btn {
+  transform: translate(-50%, -50%);
+}
+.project::before {
+  content: "";
+  background: rgba(0, 0, 0, 0.603);
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.project:hover::before {
+  opacity: 1;
+}
+img {
+  height: 100%;
+  width: 100%;
+}
+.scroller {
+  display: inline-block;
+  animation: 10s scroll infinite linear;
+}
+.project-scroller:hover .scroller {
+  animation-play-state: paused;
+}
+.project-scroller::before,
+.project-scroller::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 8rem;
+  height: 11rem;
+  z-index: 2;
+}
+.project-scroller::before {
+  left: 0;
+  background: linear-gradient(to right, var(--primary-white), transparent);
+}
+.project-scroller::after {
+  right: 0;
+  background: linear-gradient(to left, var(--primary-white), transparent);
+}
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+@keyframes blob {
+  0%,
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  50% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 70%;
+  }
+}
+@media screen and (max-width: 580px) {
+  .profile-container,
+  .navlist {
+    display: none;
+  }
+  .project-scroller::before,
+  .project-scroller::after {
+    width: 4rem;
+  }
+}
