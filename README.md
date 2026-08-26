@@ -16,4 +16,4 @@ A clean, modern, static personal portfolio built for **Anupam Chakraborty**, a S
 Edit the external links in `index.html` to update the LinkedIn, GitHub, portfolio, and project destinations.
 
 ### 2. Contact Form
-The form opens the visitor's default email application and addresses the message to `anupaminvent@gmail.com`. For reliable direct delivery without requiring an email client, replace its `mailto:` action in `index.html` with an endpoint from a service such as [Formspree](https://formspree.io).
+The form opens the visitor's default email application with the recipient, subject, and message prefilled. You receive the email only after the visitor sends it from their email app. For reliable direct delivery without requiring an email client, connect the form to an endpoint from a service such as [Formspree](https://formspree.io).

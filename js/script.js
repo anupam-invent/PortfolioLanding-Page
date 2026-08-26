@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
     const navLinks = document.querySelectorAll('.nav-link');
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
     const sections = [...document.querySelectorAll('section[id]')];
     const sectionLinks = sections.map(section => ({
         section,
@@ -41,6 +43,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     backToTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+
+    contactForm.addEventListener('submit', event => {
+        event.preventDefault();
+
+        if (!contactForm.reportValidity()) return;
+
+        const formData = new FormData(contactForm);
+        const senderName = formData.get('name').trim();
+        const senderEmail = formData.get('email').trim();
+        const message = formData.get('message').trim();
+        const subject = `Portfolio enquiry from ${senderName}`;
+        const body = `Name: ${senderName}\nEmail: ${senderEmail}\n\nMessage:\n${message}`;
+
+        formStatus.textContent = 'Opening your email app…';
+        window.location.href = `mailto:anupaminvent@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     });
 
     if (supportsCustomCursor) {

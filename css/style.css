@@ -542,6 +542,7 @@ a.info-value:hover { color: var(--accent); }
 .form-group input:focus, .form-group textarea:focus {
     outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light);
 }
+.form-status { min-height: 1.5rem; margin-top: 1rem; color: var(--text-muted); font-size: 0.85rem; text-align: center; }
 .footer { border-top: 1px solid var(--border-color); padding: 5rem 0 3rem; background: linear-gradient(180deg, var(--bg-secondary), #090e18); }
 .footer-container { display: flex; flex-direction: column; gap: 2rem; }
 .footer-logo { font-size: 1.35rem; font-weight: 700; display: block; margin-bottom: 0.5rem; }
