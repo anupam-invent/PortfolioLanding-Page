@@ -9,11 +9,3 @@ A clean, modern, static personal portfolio built for **Anupam Chakraborty**, a S
 - **Accessible & Lightweight**: Fast load times, semantic HTML5 markup, ARIA tags, and keyboard navigation.
 
 ---
-
-## 🛠️ How to Customize
-
-### 1. Update Personal & Social Links
-Edit the external links in `index.html` to update the LinkedIn, GitHub, portfolio, and project destinations.
-
-### 2. Contact Form
-The form opens the visitor's default email application with the recipient, subject, and message prefilled. You receive the email only after the visitor sends it from their email app. For reliable direct delivery without requiring an email client, connect the form to an endpoint from a service such as [Formspree](https://formspree.io).
