@@ -208,7 +208,6 @@ button, input, textarea { font-family: inherit; font-size: inherit; }
     transform: translateY(-2px);
 }
 .btn-sm { padding: 0.5rem 1.25rem; font-size: 0.85rem; }
-.btn-full { width: 100%; }
 
 .header {
     position: fixed;
@@ -536,65 +535,24 @@ a.info-value:hover { color: var(--accent); }
 }
 .social-btn:hover { border-color: var(--accent); background-color: var(--bg-card); transform: translateY(-2px); }
 
-.contact-form {
-    background-color: var(--bg-secondary); border: 1px solid var(--border-color);
-    padding: 2.5rem; border-radius: var(--border-radius); box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+.contact-map {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 450px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    overflow: hidden;
 }
-.form-group { margin-bottom: 1.5rem; }
-.form-group label {
-    display: block; font-size: 0.9rem; font-weight: 500;
-    margin-bottom: 0.65rem; color: var(--text-secondary);
-}
-.form-group input, .form-group textarea {
-    width: 100%; padding: 0.85rem 1.25rem; background-color: var(--bg-primary);
-    border: 1px solid var(--border-color); border-radius: var(--border-radius-sm);
-    color: var(--text-primary); transition: var(--transition);
-}
-.form-group input:focus, .form-group textarea:focus {
-    outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light);
-}
-.form-status { min-height: 1.5rem; margin-top: 1rem; color: var(--text-muted); font-size: 0.85rem; text-align: center; }
-.form-status.success { color: var(--success); }
-.form-status.error { color: #ef4444; }
-
-.field-error {
-    display: none;
-    color: #ef4444;
-    font-size: 0.8rem;
-    line-height: 1.5;
-    margin-top: 0.35rem;
-}
-.field-error:not(:empty) { display: block; }
-
-.form-group input.is-invalid,
-.form-group textarea.is-invalid {
-    border-color: #ef4444;
-}
-.form-group input.is-invalid:focus,
-.form-group textarea.is-invalid:focus {
-    border-color: #ef4444;
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
-}
-
-.honeypot {
+.contact-map iframe {
     position: absolute;
-    left: -9999px;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.btn:disabled,
-.btn:disabled:hover {
-    opacity: 0.65;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}
-.btn-primary:disabled,
-.btn-primary:disabled:hover {
-    background-color: var(--accent);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
 }
 .footer { border-top: 1px solid var(--border-color); padding: 5rem 0 3rem; background: linear-gradient(180deg, var(--bg-secondary), #090e18); }
 .footer-container { display: flex; flex-direction: column; gap: 2rem; }

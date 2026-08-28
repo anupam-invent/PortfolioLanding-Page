@@ -28,7 +28,7 @@ Welcome to the official repository of the personal portfolio website for **Anupa
 * **Fully Responsive UI:** Designed with a mobile-first philosophy to ensure pixel-perfect presentation across mobile, tablet, and widescreen viewports.
 * **Accessible Coding Practices:** Built-in keyboard accessibility skip-links (`Skip to content`), proper focus management, ARIA landmark roles, and structural text sizing.
 * **Prefers-Reduced-Motion Compatible:** Detects and respects system-level accessibility settings, gracefully bypassing animations and custom cursor effects for users with motion sensitivity.
-* **Form Redirection:** Integrated client-side contact form with validation and honeypot anti-spam that submits via FormSubmit, with an automatic fallback that launches the mail application pre-filled with structured subject/body context via dynamic `mailto:` parameters.
+* **Interactive Contact Section:** A responsive contact section with key details, social links, and an embedded API-key-free Google Map showing the Dhaka location.
 
 ---
 
