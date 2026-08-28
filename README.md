@@ -17,7 +17,7 @@ Welcome to the official repository of the personal portfolio website for **Anupa
 ### 🛠️ SQA-First Interactive Visuals
 * **Live Test Suite Terminal Mockup:** An elegant hero component presenting a mock `test_suite_execution.log` detailing automatic regression sweeps, schema validations, and JMeter-based load tests.
 * **Structured SQA Workflow Timeline:** A responsive, step-by-step pipeline illustrating Anupam's professional QA lifecycle—from analyzing spec requirements and test case design to defect reporting in Jira and regression releases.
-* **Filterable & Rich Skill Competencies:** Clearly organized modules highlighting technical capabilities in manual testing, automation, API validation, performance, databases, and version control.
+* **Rich Skill Competencies:** Clearly organized modules highlighting technical capabilities in manual testing, automation, API validation, performance, databases, and version control.
 
 ### ⚡ Modern Frontend Architecture
 * **Pure Static Implementation:** Built entirely with semantic **HTML5**, modern **CSS3** (custom properties, flexbox/grid layouts), and optimized **Vanilla JavaScript**. No heavy frameworks, bundlers, or compilation steps required—ensuring blazing-fast page speeds.
@@ -28,7 +28,7 @@ Welcome to the official repository of the personal portfolio website for **Anupa
 * **Fully Responsive UI:** Designed with a mobile-first philosophy to ensure pixel-perfect presentation across mobile, tablet, and widescreen viewports.
 * **Accessible Coding Practices:** Built-in keyboard accessibility skip-links (`Skip to content`), proper focus management, ARIA landmark roles, and structural text sizing.
 * **Prefers-Reduced-Motion Compatible:** Detects and respects system-level accessibility settings, gracefully bypassing animations and custom cursor effects for users with motion sensitivity.
-* **Form Redirection:** Integrated client-side contact form verification that launches the mail application pre-filled with structured subject/body context via dynamic `mailto:` parameters.
+* **Form Redirection:** Integrated client-side contact form with validation and honeypot anti-spam that submits via FormSubmit, with an automatic fallback that launches the mail application pre-filled with structured subject/body context via dynamic `mailto:` parameters.
 
 ---
 
@@ -46,7 +46,7 @@ portfolio/
 ├── css/
 │   └── style.css          # Modern typography, variables, responsive design, & animations
 ├── js/
-│   └── script.js          # Intersection Observer, custom cursor logic, and forms
+│   └── script.js          # Intersection Observer, custom cursor logic, forms, and scroll UI
 ├── CNAME                  # Custom GitHub Pages domain pointer (anupaminvent.qd.je)
 ├── index.html             # Main document semantic markup containing SEO/OpenGraph meta tags
 └── README.md              # Project documentation and engineering guide

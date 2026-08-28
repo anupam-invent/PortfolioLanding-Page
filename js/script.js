@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
     const header = document.getElementById('header');
     const backToTopBtn = document.getElementById('backToTop');
     const navToggle = document.getElementById('navToggle');
@@ -112,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const subject = `Portfolio enquiry from ${senderName}`;
         const body = `Name: ${senderName}\nEmail: ${senderEmail}\n\nMessage:\n${message}`;
 
-        setStatus('Opening your email app… If it didn\u2019t open, email anupaminvent@gmail.com directly.', 'error');
+        setStatus('Opening your email app… If it didn\u2019t open, email anupaminvent@gmail.com directly.');
         window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     };
 
@@ -236,7 +239,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: true });
 
         document.addEventListener('pointerover', event => {
-            cursorRing.classList.toggle('is-hovering', Boolean(event.target.closest('a, button, input, textarea')));
+            const target = event.target instanceof Element ? event.target : event.target.parentElement;
+            cursorRing.classList.toggle('is-hovering', Boolean(target.closest('a, button, input, textarea')));
         });
         document.addEventListener('pointerleave', () => {
             cursorDot.classList.remove('is-visible');
