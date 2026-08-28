@@ -45,20 +45,156 @@ document.addEventListener('DOMContentLoaded', () => {
         window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
     });
 
-    contactForm.addEventListener('submit', event => {
-        event.preventDefault();
+    const CONTACT_EMAIL = 'anupaminvent@gmail.com';
+    const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
+    const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
+    const errorEls = {
+        name: document.getElementById('nameError'),
+        email: document.getElementById('emailError'),
+        message: document.getElementById('messageError')
+    };
+    const formFields = [nameInput, emailInput, messageInput];
+    let isSubmitting = false;
 
-        if (!contactForm.reportValidity()) return;
+    const setStatus = (text, type = '') => {
+        formStatus.textContent = text;
+        formStatus.classList.remove('success', 'error');
+        if (type) formStatus.classList.add(type);
+    };
 
-        const formData = new FormData(contactForm);
-        const senderName = formData.get('name').trim();
-        const senderEmail = formData.get('email').trim();
-        const message = formData.get('message').trim();
+    const setFieldError = (input, errorEl, message) => {
+        errorEl.textContent = message;
+        input.classList.toggle('is-invalid', Boolean(message));
+        input.setAttribute('aria-invalid', Boolean(message) ? 'true' : 'false');
+    };
+
+    const clearErrors = () => {
+        formFields.forEach(input => setFieldError(input, errorEls[input.id], ''));
+    };
+
+    const validateForm = () => {
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const message = messageInput.value.trim();
+        let firstInvalid = null;
+
+        if (name.length < 2) {
+            setFieldError(nameInput, errorEls.name, 'Please enter your full name.');
+            firstInvalid = firstInvalid || nameInput;
+        } else {
+            setFieldError(nameInput, errorEls.name, '');
+        }
+
+        if (!EMAIL_REGEX.test(email)) {
+            setFieldError(emailInput, errorEls.email, 'Please enter a valid email address.');
+            firstInvalid = firstInvalid || emailInput;
+        } else {
+            setFieldError(emailInput, errorEls.email, '');
+        }
+
+        if (message.length < 10) {
+            setFieldError(messageInput, errorEls.message, 'Please enter a message of at least 10 characters.');
+            firstInvalid = firstInvalid || messageInput;
+        } else {
+            setFieldError(messageInput, errorEls.message, '');
+        }
+
+        return firstInvalid;
+    };
+
+    const openMailClient = () => {
+        const senderName = nameInput.value.trim();
+        const senderEmail = emailInput.value.trim();
+        const message = messageInput.value.trim();
         const subject = `Portfolio enquiry from ${senderName}`;
         const body = `Name: ${senderName}\nEmail: ${senderEmail}\n\nMessage:\n${message}`;
 
-        formStatus.textContent = 'Opening your email app…';
-        window.location.href = `mailto:anupaminvent@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        setStatus('Opening your email app… If it didn\u2019t open, email anupaminvent@gmail.com directly.', 'error');
+        window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    };
+
+    formFields.forEach(input => {
+        input.addEventListener('input', () => {
+            setFieldError(input, errorEls[input.id], '');
+            formStatus.textContent = '';
+            formStatus.classList.remove('success', 'error');
+        });
+    });
+
+    contactForm.addEventListener('submit', async event => {
+        event.preventDefault();
+        if (isSubmitting) return;
+
+        const honeypot = contactForm.querySelector('input[name="_honey"]');
+        if (honeypot && honeypot.value.trim() !== '') {
+            setStatus('Thanks! Your message was sent successfully.', 'success');
+            contactForm.reset();
+            return;
+        }
+
+        const firstInvalid = validateForm();
+        if (firstInvalid) {
+            setStatus('Please fix the highlighted fields and try again.', 'error');
+            firstInvalid.focus();
+            return;
+        }
+
+        isSubmitting = true;
+        const submitBtn = document.getElementById('submitBtn');
+        const originalLabel = submitBtn.textContent;
+        const payload = {
+            name: nameInput.value.trim(),
+            email: emailInput.value.trim(),
+            message: messageInput.value.trim(),
+            _subject: `Portfolio enquiry from ${nameInput.value.trim()}`,
+            _template: 'table',
+            _captcha: 'false'
+        };
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+        contactForm.setAttribute('aria-busy', 'true');
+        setStatus('Sending your message…');
+
+        let sent = false;
+        try {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 10000);
+            const response = await fetch(FORM_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(payload),
+                signal: controller.signal
+            });
+            clearTimeout(timeout);
+            sent = response.ok;
+            if (sent) {
+                try {
+                    const data = await response.json();
+                    if (data && String(data.success) === 'false') sent = false;
+                } catch (err) {
+                    sent = true;
+                }
+            }
+        } catch (err) {
+            sent = false;
+        }
+
+        if (sent) {
+            clearErrors();
+            contactForm.reset();
+            setStatus('Thanks! Your message was sent successfully.', 'success');
+        } else {
+            openMailClient();
+        }
+
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
+        contactForm.removeAttribute('aria-busy');
+        isSubmitting = false;
     });
 
     if (supportsCustomCursor) {
