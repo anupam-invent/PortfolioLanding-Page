@@ -262,19 +262,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const revealElements = document.querySelectorAll('.reveal-on-scroll');
-    if (reduceMotion || !('IntersectionObserver' in window)) {
-        revealElements.forEach(element => element.classList.add('is-visible'));
-        return;
+    let revealArmed = false;
+
+    if (revealElements.length > 0 && !reduceMotion && 'IntersectionObserver' in window) {
+        try {
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '0px 0px -50px 0px', threshold: 0.15 });
+
+            revealElements.forEach(element => revealObserver.observe(element));
+            document.documentElement.classList.add('reveal-active');
+            revealArmed = true;
+        } catch (err) {
+            document.documentElement.classList.remove('reveal-active');
+        }
     }
 
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { rootMargin: '0px 0px -50px 0px', threshold: 0.15 });
-
-    revealElements.forEach(element => revealObserver.observe(element));
+    if (!revealArmed) {
+        revealElements.forEach(element => element.classList.add('is-visible'));
+    }
 });
