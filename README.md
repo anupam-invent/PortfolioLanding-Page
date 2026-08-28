@@ -22,7 +22,7 @@ Welcome to the official repository of the personal portfolio website for **Anupa
 ### ⚡ Modern Frontend Architecture
 * **Pure Static Implementation:** Built entirely with semantic **HTML5**, modern **CSS3** (custom properties, flexbox/grid layouts), and optimized **Vanilla JavaScript**. No heavy frameworks, bundlers, or compilation steps required—ensuring blazing-fast page speeds.
 * **Smooth Animation & Scroll Engine:** Powered by the lightweight **Intersection Observer API** for seamless scroll-reveal transitions, custom active-state navigation indicators, and dynamic header sticky states.
-* **Custom Interactive Pointer Dynamics:** Interactive smart cursor trail tracking the user's viewport with contextual state reactions (hover, click, form focus) using `requestAnimationFrame` for stutter-free rendering.
+* **Custom Interactive Pointer Dynamics:** Interactive smart cursor trail tracking the user's viewport with contextual state reactions over links and buttons using `requestAnimationFrame` for stutter-free rendering.
 
 ### ♿ Accessibility (A11y) & Performance Oriented
 * **Fully Responsive UI:** Designed with a mobile-first philosophy to ensure pixel-perfect presentation across mobile, tablet, and widescreen viewports.
@@ -41,12 +41,13 @@ portfolio/
 ├── .git/                  # Git repository configurations
 ├── assets/
 │   └── images/
+│       ├── Anupam_Chakraborty_CV.pdf # Downloadable CV/resume
 │       ├── favicon.ico    # Website tab icon
 │       └── profile.jpg    # Professional profile photograph of Anupam
 ├── css/
 │   └── style.css          # Modern typography, variables, responsive design, & animations
 ├── js/
-│   └── script.js          # Intersection Observer, custom cursor logic, forms, and scroll UI
+│   └── script.js          # Intersection Observer, custom cursor logic, and scroll UI
 ├── CNAME                  # Custom GitHub Pages domain pointer (anupaminvent.qd.je)
 ├── index.html             # Main document semantic markup containing SEO/OpenGraph meta tags
 └── README.md              # Project documentation and engineering guide
